@@ -1,5 +1,4 @@
 #!/bin/bash
-echo "start -> "
 cd "/Applications/<ProjectName>.app/"
 
 # process origin binary
@@ -17,3 +16,12 @@ EOF
 echo -e "$cont" > <ProjectName>
 chown root.wheel  <ProjectName>
 chmod +x 		  <ProjectName>
+
+# clean icon cache
+echo "****** Clean icon cache..."
+su -c /usr/bin/uicache mobile > /dev/null
+
+# cefresh uicache
+echo "****** Refresh uicache..."
+/usr/bin/uicache
+echo "Congratulations for you, root app access to success !"
