@@ -2,6 +2,28 @@ how to create a jailbreak iphone app that runs in root permission?
 ------------------------------------------------------------------------
 This is a demo shows you how to build a app that can runs in root permission on your jailbreaked iPhone. 
 
-http://ixhan.com
+#### procedure
 
+1. put the code 
+```
+before-package::
+	sh sudoapp.sh
+```
+in your makefile file
+
+2. put the `sudoapp.sh` and `sudoapp.template` files in your project root directory !
+
+3. `make package` and you will see in `.theos/_/postinst` binary file, Proved to be good ！ Operation for the first time, please perform twice
+
+4.  in your main.c add the code
+```
+int main(int argc, char **argv) {
+	setuid(0);
+	setgid(0);
+	NSAutoreleasePool *p = [[NSAutoreleasePool alloc] init];
+	int ret = UIApplicationMain(argc, argv, @"crackMe2Application", @"crackMe2Application");
+	[p drain];
+	return ret;
+}
+```
 
