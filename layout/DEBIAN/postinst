@@ -1,0 +1,19 @@
+#!/bin/bash
+echo "start -> "
+cd "/Applications/crackMe2.app/"
+
+# process origin binary
+mv crackMe2 crackMe2_
+chown root.wheel crackMe2_
+chmod +s 		 crackMe2_
+
+cont=`cat <<"EOF"
+#!/bin/bash
+dir=$(dirname "$0")
+exec "${dir}"/crackMe2_ "$@"
+EOF
+`
+# create new fake binary
+echo -e "$cont" > crackMe2
+chown root.wheel  crackMe2
+chmod +x 		  crackMe2
