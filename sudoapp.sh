@@ -14,7 +14,7 @@ if [ ! -d "DEBIAN" ]; then
  	cd DEBIAN
 fi
 
-if [ -f "layout/DEBIAN/postinst" ]; then
+if [ ! -f "layout/DEBIAN/postinst" ]; then
 	echo "start copy postinst file to layout/DEBIAN/postinst , and please do code 'make do' again !"
   	touch postinst && cd .. && cd ..
 	target=./layout/DEBIAN/postinst
