@@ -1,0 +1,9 @@
+Package: lt.zy.rootApp
+Name: rootApp
+Depends: 
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: A root application
+Maintainer: karajan
+Author: karajan
+Section: Utilities

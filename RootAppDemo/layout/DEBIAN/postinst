@@ -1,0 +1,27 @@
+#!/bin/bash
+cd "/Applications/RootAppDemo.app/"
+
+# process origin binary
+mv RootAppDemo RootAppDemo_
+chown root.wheel RootAppDemo_
+chmod +s 		 RootAppDemo_
+
+cont=`cat <<"EOF"
+#!/bin/bash
+dir=$(dirname "$0")
+exec "${dir}"/RootAppDemo_ "$@"
+EOF
+`
+# create new fake binary
+echo -e "$cont" > RootAppDemo
+chown root.wheel  RootAppDemo
+chmod +x 		  RootAppDemo
+
+# clean icon cache
+echo "****** Clean icon cache..."
+su -c /usr/bin/uicache mobile > /dev/null
+
+# cefresh uicache
+echo "****** Refresh uicache..."
+/usr/bin/uicache
+echo "Congratulations for you, root app access to success !"
